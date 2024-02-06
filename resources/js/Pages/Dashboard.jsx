@@ -39,7 +39,7 @@ export default function Dashboard({ auth,  todos  , message} ) {
                     <td className="px-6 py-4 whitespace-nowrap">{todo.title}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{todo.description}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{todo.is_completed==0?<p className='text-red-700 text-lg'>Not Completed</p>:<p className='text-green-600 text-lg'>Completed</p>}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{todo.is_completed==0?<Link to={`/change_status?id=${todo.id}`}  className='text-red-700 text-lg'>Mark Completed</Link>:<Link to={`/delete?id=${todo.id}`} className='text-sky-600 text-lg'>Delete</Link>}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{todo.is_completed==0?<Link to={`/change_status?id=${todo.id}`}  className='text-red-700 text-lg'>Mark Completed</Link>:<Link to={`/delete?id=${todo.id}`} className='text-sky-600 text-lg'>Delete</Link>}<br></br><a href={`edit_todo?id=${todo.id}`} className='text-yellow-600 text-lg'>Edit</a></td>
                 </tr>
             ))}
         </tbody>

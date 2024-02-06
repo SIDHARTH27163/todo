@@ -66,6 +66,47 @@ class TodoController extends Controller
             dd($e);
         }
     }
+    public function edit(Request $request){
+        try{
+            $todoId = $request->query('id');
+            $todo = Todo::find($todoId);
+
+            return Inertia::render('todos/Edit', ['todo' => $todo]);
+        }catch(\Exception $e){
+            dd($e);
+        }
+    }
+    public function edit_todo(Request $request ,  $id){
+        try{
+            $validator = Validator::make($request->all(), [  
+                'title' => 'required|string|max:255',
+                'description' => 'required|string|max:2055',
+            ]);
+    
+            // If validation fails, return error response
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422);
+            }
+    
+            // Find the todo by id
+            $todo = Todo::find($id);
+    
+            // If todo not found, return error response
+            if (!$todo) {
+                return response()->json(['error' => 'Todo not found'], 404);
+            }
+    
+            // Update the todo with new data
+            $todo->title = $request->title;
+            $todo->description = $request->description;
+            $todo->save();
+    
+            // Return success response
+            return response()->json(['message' => 'Todo updated successfully']);
+        }catch(\Exception $e){
+            dd($e);
+        }
+    }
     public function change_status( Request $request){
         $todoId = $request->query('id');
         DB::update('update todos set is_completed = 1 where id = ?', [$todoId]);

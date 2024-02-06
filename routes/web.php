@@ -42,4 +42,6 @@ Route::get('/dashboard', [TodoController::class , 'get_todo_list'])->middleware(
 Route::get('/change_status', [TodoController::class , 'change_status'])->middleware(['auth', 'verified']);
 Route::get('/delete', [TodoController::class , 'delete'])->middleware(['auth', 'verified']);
 Route::post('add_todo' , [TodoController::class , 'index'])->middleware(['auth', 'verified'])->name('add_todo');
+Route::get('edit_todo' , [TodoController::class , 'edit'])->middleware(['auth', 'verified'])->name('edit_todo');
+Route::put('todo.update{id}' , [TodoController::class , 'edit_todo'])->middleware(['auth', 'verified'])->name('todo.update');
 require __DIR__.'/auth.php';
